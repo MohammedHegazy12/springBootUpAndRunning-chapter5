@@ -1,26 +1,27 @@
 package com.example.endpoints.controllers;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.example.endpoints.pojo.Greeting;
 
 @RestController
 @RequestMapping("/greeting")
 public class GreetingController {
    
-	@Value("${greeting-name: Mohammed}")
-	private String name;
+	private final Greeting greeting;
 	
-	@Value("${greeting-coffee}: ${greeting-name} is drinking coffee  Ganador")
-	private String coffee;
-	
+	public GreetingController(Greeting greeting) {
+		super();
+		this.greeting = greeting;
+	}
 	@GetMapping("")
 	String name() {
-		return name;
+		return greeting.getName();
 	}
 	@GetMapping("/coffee")
 	String getNameAndCoffe() {
-		return coffee;
+		return greeting.getCoffee();
 	}
 }
